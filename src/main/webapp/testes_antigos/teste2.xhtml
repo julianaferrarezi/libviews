@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition template="/template/ui.xhtml" 
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions" 
+    >
+
+	<ui:define name="title">Representação</ui:define>
+	
+	<ui:define name="header">
+		<meta name="header" content="Representação" />
+	</ui:define>
+	
+	<ui:define name="content">
+		<p:panel id="panelGrafico" header="Gráfico" style="text-align: center;position: relative;justify-content: center; width: 100%;" >
+			<p:chart type="donut" model="#{chartView.donutModel1}" />
+		</p:panel>
+	</ui:define>
+</ui:composition>

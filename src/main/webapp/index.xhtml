@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition template="/template/ui.xhtml" 
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions" 
+    >
+
+	<ui:define name="title">LibViews</ui:define>
+	
+	<ui:define name="style_css">
+		<link rel="stylesheet" href="template/css/foundation.css" />
+	</ui:define>
+	
+	<ui:define name="header">
+		<meta name="header" content="LibViews" />
+	</ui:define>
+	
+	<ui:define name="content">
+		<h:form id="formDados" >
+			<p:growl id="msgs" showDetail="true" autoUpdate="true" />
+
+			<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+			<p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
+	    		<h:graphicImage library="images" name="ajax-loader.gif"/>
+			</p:dialog>
+			
+		    <div class="row">
+		      <div class="large-12 columns">
+		      	<div class="panel">
+			        <h3>LibViews</h3>
+			    </div>
+			  </div>
+		    </div>    
+		    <div class="row">
+			    <div class="large-12 medium-12 columns" style= "margin-bottom: 20px;">
+			      <label>Welcome to LibViews! It's an information visualization application to create visual
+representations over libraries metrics and usage on software projects. Please, fill the form follow and click on the submit button.</label>
+			    </div>
+			</div>
+			<div class="row">
+			    <div class="large-12 medium-12 columns">
+			      <label>Project directory</label>
+			      <label style="font-size: 10px;">Example: /home/user/workspace/app</label>
+			      <h:inputText value="#{inicioMB.dirProject}" required="true" requiredMessage="Project directory is required" />
+			    </div>
+			</div>
+			<div class="row">
+				<div class="large-12 medium-12 columns">
+					<p:commandButton type="submit" value="Submit" action="#{inicioMB.project}"> </p:commandButton>
+			    </div>   
+		    </div>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

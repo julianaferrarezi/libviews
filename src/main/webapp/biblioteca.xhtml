@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition template="/template/ui.xhtml" 
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions" 
+    >
+
+	<ui:define name="title">Representação</ui:define>
+	
+	<ui:define name="header">
+		<meta name="header" content="Representação" />
+	</ui:define>
+	
+	<ui:define name="style_css">
+		<link rel="stylesheet" type="text/css" href="skill.css"/>
+	</ui:define>
+	
+	<ui:define name="content">
+	   <div id="skills">
+	      <div id="skillmap">
+	        <div class="skills-wrapper">
+	          <div class="skills-sunburst"></div>
+	          <div class="skills-chart">
+	            <div id="skills-chart-breadcrumb"></div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>    
+	</ui:define>
+	<ui:define name="script">
+	    <script src="http://d3js.org/d3.v3.min.js"></script>
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	    <script type="text/javascript" src="skillsdata_primefaces.js"></script>
+	    <script type="text/javascript" src="skill.js"></script>
+	    <script type="text/javascript">
+	      // Hack to make this example display correctly in an iframe on bl.ocks.org
+	      d3.select(self.frameElement).style("height", "700px");
+	  </script> 
+	</ui:define>
+</ui:composition>

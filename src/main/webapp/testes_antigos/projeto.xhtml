@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition template="/template/ui.xhtml" 
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions" 
+    >
+
+	<ui:define name="title">Representação</ui:define>
+	
+	<ui:define name="header">
+		<meta name="header" content="Representação" />
+	</ui:define>
+	
+	<ui:define name="content">
+		<h:form id="formDados">
+			<p:growl id="msgs" showDetail="true" autoUpdate="true" />
+
+			<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+			<p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
+	    		<h:graphicImage library="images" name="ajax-loader.gif"/>
+			</p:dialog>
+			
+		    <div class="row">
+		      <div class="large-12 columns">
+		      	<div class="panel">
+			        <h3>Seja bem-vindo! </h3>
+			    </div>
+			  </div>
+		    </div>    
+			
+			<div class="row">
+			    <div class="large-12 medium-12 columns">
+			      <label>Projeto</label>
+			      <p:fileUpload value="#{inicioMB.pomProjeto}" placeholder="Selecione o pom.xml do projeto" mode="simple" skinSimple="true"/>
+			    </div>
+			</div>
+			
+			<div class="row">
+			    <div class="large-12 medium-12 columns">
+			      <label>Biblioteca</label>
+			    </div>
+			    <ui:repeat var="email" value="#{inicioMB.versaoBiblioteca}" varStatus="row">
+	                <div class="large-12 medium-12 columns">  
+				      <p:fileUpload value="#{inicioMB.versaoBiblioteca[row.index]}" placeholder="Selecione o jar da biblioteca" mode="simple" skinSimple="true"/>
+				    </div>
+                </ui:repeat>
+			    
+			</div>
+			
+			<div class="row">
+				<div class="large-12 medium-12 columns">
+			        <p:commandButton id="btn_salvar" value="Salvar" ajax="false" actionListener="#{inicioMB.gerarGrafico}" icon="ui-icon-disk" update=":panelGrafico :formDados:msgs"/>
+			    </div>   
+		    </div>
+		</h:form>
+		
+		<div class="row">
+		   <div class="large-12 columns">
+				<div id="skills">
+			      <div id="skillmap">
+			        <div class="skills-wrapper">
+			          <div class="skills-sunburst" style="width=400px;"></div>
+			          <div class="skills-chart"  style="width=400px;">
+			            <div id="skills-chart-breadcrumb"></div>
+			          </div>
+			        </div>
+			      </div>
+			    </div>
+			</div>
+		</div>
+	</ui:define>
+	<ui:define name="script">
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+	    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	    <script type="text/javascript" src="skillsdata.js"></script>
+	    <script type="text/javascript" src="skill.js"></script>
+	    <script type="text/javascript">
+		      // Hack to make this example display correctly in an iframe on bl.ocks.org
+		      d3.select(self.frameElement).style("height", "700px");
+		  </script>
+	</ui:define>
+</ui:composition>

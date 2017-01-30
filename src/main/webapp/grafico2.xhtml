@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition template="/template/ui_novo.xhtml" 
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions" 
+    >
+
+	<ui:define name="title">Representação</ui:define>
+	
+	<ui:define name="style_css">
+		
+	</ui:define>
+	
+	<ui:define name="header">
+		<meta name="header" content="Representação" />
+	</ui:define>
+	
+	<ui:define name="content">
+		<p:chart type="line" model="#{graficoMB.lineModel1}" style="height:300px;" responsive="true"/>
+	</ui:define>
+</ui:composition>

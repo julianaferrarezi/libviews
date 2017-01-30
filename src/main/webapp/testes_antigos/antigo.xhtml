@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition template="/template/ui.xhtml" 
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions" 
+    >
+
+	<ui:define name="title">Representação</ui:define>
+	
+	<ui:define name="style_css">
+		<link rel="stylesheet" href="template/css/foundation.css" />
+		<link rel="stylesheet" type="text/css" href="skill.css"/>
+	</ui:define>
+	
+	<ui:define name="header">
+		<meta name="header" content="Representação" />
+	</ui:define>
+	
+	<ui:define name="content">
+		<h:form id="formDados" >
+			<p:growl id="msgs" showDetail="true" autoUpdate="true" />
+
+			<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+			<p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
+	    		<h:graphicImage library="images" name="ajax-loader.gif"/>
+			</p:dialog>
+			
+		    <div class="row">
+		      <div class="large-12 columns">
+		      	<div class="panel">
+			        <h3>Seja bem-vindo! </h3>
+			    </div>
+			  </div>
+		    </div>    
+			<div class="row">
+				<div class="large-12 medium-12 columns">
+			      <label>Projeto</label>
+			      <h:selectOneMenu id="metrica" name="metrica" value="#{inicioMB.metrica}" required="true" >
+			      		<f:selectItem itemLabel="NDRM (Number of References to Removed Methods)" itemValue="ndrm" />
+				        <f:selectItem itemLabel="NSM (Number of Snapshot Methods)" itemValue="nsm" />
+				        <f:selectItem itemLabel="NNM (Number of New Methods)" itemValue="nnm" />
+			      </h:selectOneMenu>
+			      
+
+			    </div>
+			</div>
+			<div class="row">
+			    <div class="large-12 medium-12 columns">
+			      <label>Projeto</label>
+			      <h:inputText value="#{inicioMB.dirProjeto}" required="true" />
+			    </div>
+			</div>
+			<div class="row">
+			    <div class="large-12 medium-12 columns">
+			      <label>Biblioteca</label>
+			    </div>
+                <div class="large-12 medium-12 columns">
+					<p:fileUpload value="#{inicioMB.versoesBiblioteca}" fileUploadListener="#{inicioMB.adicionarBiblioteca}" mode="advanced" dragDropSupport="false" 
+			                  multiple="true" update="msgs" allowTypes="/(\.|\/)(txt|TXT)$/"  required="true" />
+			    </div>
+			</div>
+			<div class="row">
+				<div class="large-12 medium-12 columns">
+					<p:commandButton type="submit" value="Gerar" action="#{inicioMB.gerarGrafico}"> </p:commandButton>
+			    </div>   
+		    </div>
+		</h:form>
+		<div class="large-12 medium-12 columns" >
+<!-- 				<p:panel id="panelGrafico" header="Representação" rendered="#{inicioMB.mostrarGrafico}"> -->
+				<p:panel id="panelGrafico" header="Representação">
+				  <div id="skills">
+				      <div id="skillmap">
+				        <div class="skills-wrapper">
+				          <div class="skills-sunburst"></div>
+				          <div class="skills-chart">
+				            <div id="skills-chart-breadcrumb"></div>
+				          </div>
+				        </div>
+				      </div>
+				    </div>
+				    
+				     <script src="http://d3js.org/d3.v3.min.js"></script>
+					<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+				    <script type="text/javascript" src="skillsdata_primefaces_nnm.js"></script>
+				    <script type="text/javascript" src="skill.js"></script>
+				    <script type="text/javascript">
+				      // Hack to make this example display correctly in an iframe on bl.ocks.org
+				      d3.select(self.frameElement).style("height", "700px");
+				  </script>     
+				</p:panel>
+			</div>	
+		
+	</ui:define>
+</ui:composition>
